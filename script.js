@@ -4,13 +4,15 @@ const canvas = document.getElementById("gameCanvas");
 // Get the 2D drawing context
 const ctx = canvas.getContext("2d");
 
-// Draw a white rectangle covering the entire canvas
-ctx.fillStyle = "white";
-ctx.fillRect(0, 0, 300, 300);
+function clearCanvas() {
+  // Draw a white rectangle covering the entire canvas
+  ctx.fillStyle = "white";
+  // Draw a black border around the rectangle
+  ctx.strokeStyle = "black";
 
-// Draw a black border around the rectangle
-ctx.strokeStyle = "black";
-ctx.strokeRect(0, 0, 300, 300);
+  ctx.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
+  ctx.strokeRect(0, 0, gameCanvas.width, gameCanvas.height);
+}
 
 // Representing snake
 let snake = [
@@ -55,6 +57,12 @@ function advanceSnake() {
   snake.unshift(head);
   snake.pop();
 }
+clearCanvas();
+// advanceSnake();
+
+dx = 0;
+dy = -10;
 
 advanceSnake();
+
 drawSnake();
