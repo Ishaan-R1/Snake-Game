@@ -48,6 +48,36 @@ function drawSnakePart(snakePart) {
 function drawSnake() {
   snake.forEach(drawSnakePart);
 }
+function changeDirection(event) {
+  const LEFT_KEY = 37;
+  const RIGHT_KEY = 39;
+  const UP_KEY = 38;
+  const DOWN_KEY = 40;
+  const keyPressed = event.keyCode;
+  const goingUp = dy === -10;
+  const goingDown = dy === 10;
+  const goingRight = dx === 10;
+  const goingLeft = dx === -10;
+  if (keyPressed === LEFT_KEY && !goingRight) {
+    dx = -10;
+    dy = 0;
+  }
+  if (keyPressed === UP_KEY && !goingDown) {
+    dx = 0;
+    dy = -10;
+  }
+  if (keyPressed === RIGHT_KEY && !goingLeft) {
+    dx = 10;
+    dy = 0;
+  }
+  if (keyPressed === DOWN_KEY && !goingDown) {
+    dx = 0;
+    dy = 10;
+  }
+}
+
+let dx = 0;
+let dy = -10;
 
 function advanceSnake() {
   const head = {
@@ -57,12 +87,23 @@ function advanceSnake() {
   snake.unshift(head);
   snake.pop();
 }
-clearCanvas();
+// clearCanvas();
+
+function main() {
+  setTimeout(function onTick() {
+    clearCanvas(); // Clear previous frame
+    advanceSnake(); // Update snake position
+    drawSnake(); // Draw updated snake
+
+    main(); // Schedule the next frame
+  }, 100);
+}
+
+document.addEventListener("keydown", changeDirection);
+// Start the game loop
+main();
+
+// onTick();
 // advanceSnake();
 
-dx = 0;
-dy = -10;
-
-advanceSnake();
-
-drawSnake();
+// drawSnake();
