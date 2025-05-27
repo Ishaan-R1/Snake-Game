@@ -89,9 +89,34 @@ function advanceSnake() {
 }
 // clearCanvas();
 
+function randomTen(min, max) {
+  return Math.round((Math.random() * (max - min) + min) / 10) * 10;
+}
+
+function createFood() {
+  foodX = randomTen(0, gameCanvas.width - 10);
+  foodY = randomTen(0, gameCanvas.height - 10);
+
+  snake.forEach(function isFoodOnSnake(part) {
+    const foodIsOnSnake = part.x == foodX && part.y == foodY;
+
+    if (foodIsOnSnake) {
+      createFood();
+    }
+  });
+}
+// Draw food
+function drawFood() {
+  ctx.fillStyle = "red";
+  ctx.strokeStyle = "darkred";
+  ctx.fillRect(foodX, foodY, 10, 10);
+  ctx.strokeRect(foodX, foodY, 10, 10);
+}
+
 function main() {
   setTimeout(function onTick() {
     clearCanvas(); // Clear previous frame
+    drawFood(); // Draw food
     advanceSnake(); // Update snake position
     drawSnake(); // Draw updated snake
 
@@ -100,8 +125,8 @@ function main() {
 }
 
 document.addEventListener("keydown", changeDirection);
-// Start the game loop
-main();
+createFood();
+main(); // Start the game loop
 
 // onTick();
 // advanceSnake();
