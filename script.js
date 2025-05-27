@@ -38,6 +38,8 @@ let snake = [
   },
 ];
 
+let score = 0;
+
 function drawSnakePart(snakePart) {
   ctx.fillStyle = "lightgreen";
   ctx.strokeStyle = "darkgreen";
@@ -88,6 +90,9 @@ function advanceSnake() {
 
   const didEatFood = snake[0].x === foodX && snake[0].y == foodY;
   if (didEatFood) {
+    score += 10;
+    document.getElementById("score").innerHTML = score;
+
     createFood(); // Generate new location for food.
   } else {
     snake.pop(); // Remove tail
