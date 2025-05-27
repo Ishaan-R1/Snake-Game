@@ -84,8 +84,14 @@ function advanceSnake() {
     x: snake[0].x + dx,
     y: snake[0].y + dy,
   };
-  snake.unshift(head);
-  snake.pop();
+  snake.unshift(head); // Add new head to beginning of snake array
+
+  const didEatFood = snake[0].x === foodX && snake[0].y == foodY;
+  if (didEatFood) {
+    createFood(); // Generate new location for food.
+  } else {
+    snake.pop(); // Remove tail
+  }
 }
 // clearCanvas();
 
