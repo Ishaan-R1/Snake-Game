@@ -1,3 +1,6 @@
+const overlay = document.getElementById("gameOverOverlay");
+const restartBtn = document.getElementById("restartBtn");
+
 // Get the canvas element
 const canvas = document.getElementById("gameCanvas");
 
@@ -39,6 +42,9 @@ let snake = [
 ];
 
 let score = 0;
+let finalScore = 0;
+
+document.getElementById("finalScore").innerHTML = "Final Score: " + 0;
 
 function drawSnakePart(snakePart) {
   ctx.fillStyle = "lightgreen";
@@ -97,7 +103,9 @@ function advanceSnake() {
   const didEatFood = snake[0].x === foodX && snake[0].y == foodY;
   if (didEatFood) {
     score += 10;
+    finalScore = score;
     document.getElementById("score").innerHTML = score;
+    document.getElementById("finalScore").innerHTML = "Final Score: " + score;
 
     createFood(); // Generate new location for food.
   } else {
@@ -142,9 +150,32 @@ function didGameEnd() {
   const hitBottomWall = snake[0].y > gameCanvas.height - 10;
   return hitLeftWall || hitRightWall || hitTopWall || hitBottomWall;
 }
+function resetGame() {
+  snake = [
+    { x: 150, y: 150 },
+    { x: 140, y: 150 },
+    { x: 130, y: 150 },
+    { x: 120, y: 150 },
+    { x: 110, y: 150 },
+  ];
+  dx = 10;
+  dy = 0;
+  score = 0;
+  document.getElementById("score").innerHTML = score;
+  createFood();
+}
+
+restartBtn.addEventListener("click", function () {
+  overlay.classList.add("hidden"); // Hide game over overlay
+  resetGame();
+  main();
+});
 
 function main() {
-  if (didGameEnd()) return; // Stop the loop if game over
+  if (didGameEnd()) {
+    overlay.classList.remove("hidden");
+    return; // Stop the loop if game over
+  }
   setTimeout(function onTick() {
     changingDirection = false;
     clearCanvas(); // Clear previous frame

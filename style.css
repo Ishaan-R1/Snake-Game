@@ -16,7 +16,11 @@ body {
   margin-bottom: 15px;
   font-weight: bold;
 }
-
+#finalScore {
+  font-size: 24px;
+  margin-bottom: 15px;
+  font-weight: lighter;
+}
 canvas {
   width: 90vmin;
   height: 90vmin;
@@ -26,4 +30,49 @@ canvas {
   border: 2px solid black;
   /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5); */
   background-color: white;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;  
+}
+
+.message-box {
+  background: white;
+  padding: 50px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 0 10px black;
+}
+
+.hidden {
+  display: none;
+}
+
+#restartBtn {
+  background-color: #4caf50;
+  color: white;
+  font-size: 18px;
+  padding: 12px 24px;
+  margin-top: 2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+#restartBtn:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
+}
+
+#restartBtn:active {
+  transform: scale(0.98);
 }

@@ -10,9 +10,18 @@
 
 <body>
     <div id="score">0</div>
-    <canvas id="gameCanvas" width="300" height="300"><canvas>
+    <div id="gameOverOverlay" class="overlay hidden">
+        <div class="message-box">
+            <h1>Game Over</h1>
+            <div id="finalScore"></div>
 
-            <script src="script.js"></script>
+            <button id="restartBtn">Restart Game</button>
+        </div>
+    </div>
+
+    <canvas id="gameCanvas" width="300" height="300"></canvas>
+
+    <script src="script.js"></script>
 </body>
 
 </html>
