@@ -55,11 +55,15 @@ function changeDirection(event) {
   const RIGHT_KEY = 39;
   const UP_KEY = 38;
   const DOWN_KEY = 40;
+
+  if (changingDirection) return; // Prevent changing twice per frame
+  changingDirection = true;
   const keyPressed = event.keyCode;
   const goingUp = dy === -10;
   const goingDown = dy === 10;
   const goingRight = dx === 10;
   const goingLeft = dx === -10;
+
   if (keyPressed === LEFT_KEY && !goingRight) {
     dx = -10;
     dy = 0;
@@ -72,7 +76,7 @@ function changeDirection(event) {
     dx = 10;
     dy = 0;
   }
-  if (keyPressed === DOWN_KEY && !goingDown) {
+  if (keyPressed === DOWN_KEY && !goingUp) {
     dx = 0;
     dy = 10;
   }
@@ -80,6 +84,8 @@ function changeDirection(event) {
 
 let dx = 0;
 let dy = -10;
+
+let changingDirection = false;
 
 function advanceSnake() {
   const head = {
@@ -140,6 +146,7 @@ function didGameEnd() {
 function main() {
   if (didGameEnd()) return; // Stop the loop if game over
   setTimeout(function onTick() {
+    changingDirection = false;
     clearCanvas(); // Clear previous frame
     drawFood(); // Draw food
     advanceSnake(); // Update snake position
@@ -152,8 +159,3 @@ function main() {
 document.addEventListener("keydown", changeDirection);
 createFood();
 main(); // Start the game loop
-
-// onTick();
-// advanceSnake();
-
-// drawSnake();
