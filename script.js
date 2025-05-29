@@ -124,7 +124,21 @@ function drawFood() {
   ctx.strokeRect(foodX, foodY, 10, 10);
 }
 
+function didGameEnd() {
+  for (let i = 4; i < snake.length; i++) {
+    const didCollide = snake[i].x === snake[0].x && snake[i].y === snake[0].y; // Check if head touches another part of snake
+    snake[i].y === snake[0].y;
+    if (didCollide) return true;
+  }
+  const hitLeftWall = snake[0].x < 0;
+  const hitRightWall = snake[0].x > gameCanvas.width - 10;
+  const hitTopWall = snake[0].y < 0;
+  const hitBottomWall = snake[0].y > gameCanvas.height - 10;
+  return hitLeftWall || hitRightWall || hitTopWall || hitBottomWall;
+}
+
 function main() {
+  if (didGameEnd()) return; // Stop the loop if game over
   setTimeout(function onTick() {
     clearCanvas(); // Clear previous frame
     drawFood(); // Draw food
