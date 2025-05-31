@@ -1,6 +1,9 @@
 const overlay = document.getElementById("gameOverOverlay");
 const restartBtn = document.getElementById("restartBtn");
 
+const savedHighScore = localStorage.getItem("highScore") || 0;
+document.getElementById("highScore").innerHTML =
+  "High Score: " + savedHighScore;
 // Get the canvas element
 const canvas = document.getElementById("gameCanvas");
 
@@ -42,9 +45,8 @@ let snake = [
 ];
 
 let score = 0;
-let finalScore = 0;
 
-document.getElementById("finalScore").innerHTML = "Final Score: " + 0;
+
 
 function drawSnakePart(snakePart) {
   ctx.fillStyle = "lightgreen";
@@ -103,7 +105,7 @@ function advanceSnake() {
   const didEatFood = snake[0].x === foodX && snake[0].y == foodY;
   if (didEatFood) {
     score += 10;
-    finalScore = score;
+    // finalScore = score;
     document.getElementById("score").innerHTML = score;
     document.getElementById("finalScore").innerHTML = "Final Score: " + score;
 
@@ -162,6 +164,7 @@ function resetGame() {
   dy = 0;
   score = 0;
   document.getElementById("score").innerHTML = score;
+  document.getElementById("finalScore").innerHTML = "Final Score: " + score;
   createFood();
 }
 
@@ -174,6 +177,16 @@ restartBtn.addEventListener("click", function () {
 function main() {
   if (didGameEnd()) {
     overlay.classList.remove("hidden");
+
+    const highScore = localStorage.getItem("highScore") || 0;
+
+    if (score > highScore) {
+      localStorage.setItem("highScore", score);
+      document.getElementById("highScore").innerHTML = "High Score: " + score;
+    } else {
+      document.getElementById("highScore").innerHTML =
+        "High Score: " + highScore;
+    }
     return; // Stop the loop if game over
   }
   setTimeout(function onTick() {
