@@ -1,3 +1,9 @@
+const biteSound = document.getElementById("biteSound");
+const thudSound = document.getElementById("thudSound");
+const clickSound = document.getElementById("clickSound");
+const restartSound = document.getElementById("restartSound");
+
+
 const overlay = document.getElementById("gameOverOverlay");
 const restartBtn = document.getElementById("restartBtn");
 
@@ -45,8 +51,6 @@ let snake = [
 ];
 
 let score = 0;
-
-
 
 function drawSnakePart(snakePart) {
   ctx.fillStyle = "lightgreen";
@@ -104,6 +108,8 @@ function advanceSnake() {
 
   const didEatFood = snake[0].x === foodX && snake[0].y == foodY;
   if (didEatFood) {
+    biteSound.currentTime = 0;
+    biteSound.play();
     score += 10;
     // finalScore = score;
     document.getElementById("score").innerHTML = score;
@@ -169,6 +175,10 @@ function resetGame() {
 }
 
 restartBtn.addEventListener("click", function () {
+  restartSound.currentTime = 0;
+  restartSound.play();
+  // clickSound.currentTime = 0;
+  // clickSound.play();
   overlay.classList.add("hidden"); // Hide game over overlay
   resetGame();
   main();
@@ -176,6 +186,8 @@ restartBtn.addEventListener("click", function () {
 
 function main() {
   if (didGameEnd()) {
+    thudSound.currentTime = 0;
+    thudSound.play();
     overlay.classList.remove("hidden");
 
     const highScore = localStorage.getItem("highScore") || 0;
