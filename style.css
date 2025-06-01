@@ -69,6 +69,8 @@ canvas {
   cursor: pointer;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   transition: background-color 0.3s ease;
+  width: 150px;
+  text-align: center;
 }
 
 #restartBtn:hover,
@@ -127,4 +129,7 @@ canvas {
 #menu button:hover {
   background-color: #45a049;
   transform: scale(1.05);
+}
+#icon {
+  padding-right: 10px;
 }

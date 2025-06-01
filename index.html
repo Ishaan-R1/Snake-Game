@@ -19,7 +19,7 @@
 
     <div id="menu">
         <h1>Snake Game</h1>
-        <button id="startBtn">Start Game</button>
+        <button id="startBtn"><i id="icon" class="fa-solid fa-play" style="color: #ffffff;"></i>Start Game</button>
     </div>
 
     <div id="scoreBoard" style="display: none;">
@@ -31,9 +31,12 @@
         <div class="message-box">
             <h1>Game Over</h1>
             <div id="finalScore">0</div>
-
-            <button id="restartBtn">Restart Game</button>
-            <button id="returnToMenu">Return to Menu</button>
+            <div class="buttons">
+                <button id="restartBtn"><i id="icon" class="fa-solid fa-rotate-left"
+                        style="color: #ffffff;"></i>Restart</button>
+                <button id="returnToMenu"><i id="icon" class="fa-solid fa-house"
+                        style="color: #ffffff;"></i>Menu</button>
+            </div>
         </div>
     </div>
     <div id="gameContainer" style="display: none;">
