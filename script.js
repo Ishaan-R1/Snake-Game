@@ -2,6 +2,7 @@ const biteSound = document.getElementById("biteSound");
 const thudSound = document.getElementById("thudSound");
 const clickSound = document.getElementById("clickSound");
 const restartSound = document.getElementById("restartSound");
+const turnSound = document.getElementById("turnSound");
 
 
 const overlay = document.getElementById("gameOverOverlay");
@@ -9,7 +10,7 @@ const restartBtn = document.getElementById("restartBtn");
 
 const savedHighScore = localStorage.getItem("highScore") || 0;
 document.getElementById("highScore").innerHTML =
-  "High Score: " + savedHighScore;
+  `<i class="fa-solid fa-trophy" style="color: #ffd700;"></i> High Score: ${savedHighScore}`;;
 // Get the canvas element
 const canvas = document.getElementById("gameCanvas");
 
@@ -18,7 +19,7 @@ const ctx = canvas.getContext("2d");
 
 function clearCanvas() {
   // Draw a white rectangle covering the entire canvas
-  ctx.fillStyle = "white";
+  ctx.fillStyle = "#f0f0f0";
   // Draw a black border around the rectangle
   ctx.strokeStyle = "black";
 
@@ -77,18 +78,26 @@ function changeDirection(event) {
   const goingLeft = dx === -10;
 
   if (keyPressed === LEFT_KEY && !goingRight) {
+    turnSound.currentTime = 0;
+    turnSound.play();
     dx = -10;
     dy = 0;
   }
   if (keyPressed === UP_KEY && !goingDown) {
+    turnSound.currentTime = 0;
+    turnSound.play();
     dx = 0;
     dy = -10;
   }
   if (keyPressed === RIGHT_KEY && !goingLeft) {
+    turnSound.currentTime = 0;
+    turnSound.play();
     dx = 10;
     dy = 0;
   }
   if (keyPressed === DOWN_KEY && !goingUp) {
+    turnSound.currentTime = 0;
+    turnSound.play();
     dx = 0;
     dy = 10;
   }
@@ -194,10 +203,11 @@ function main() {
 
     if (score > highScore) {
       localStorage.setItem("highScore", score);
+      document.getElementById("highScore").innerHTML = `<i class="fa-solid fa-trophy" style="color: #ffd700;"></i> High Score: ${score}`;
       document.getElementById("highScore").innerHTML = "High Score: " + score;
     } else {
       document.getElementById("highScore").innerHTML =
-        "High Score: " + highScore;
+        `<i class="fa-solid fa-trophy" style="color: #ffd700;"></i> High Score: ${highScore}`;
     }
     return; // Stop the loop if game over
   }

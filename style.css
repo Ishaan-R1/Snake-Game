@@ -6,7 +6,17 @@ body {
   height: 100vh;
   margin: 0;
   /* background-color: #f0f0f0; */
+  background: #2A7B9B;
+/* background: linear-gradient(52deg, rgba(42, 123, 155, 1) 0%, rgba(87, 199, 133, 1) 50%, rgba(237, 221, 83, 1) 100%); */
+background: linear-gradient(
+  52deg,
+  rgba(42, 123, 155, 0.8) 0%,       /* Softer teal-blue */
+  rgba(87, 199, 133, 0.75) 50%,     /* Milder green */
+  rgba(237, 221, 83, 0.7) 100%      /* Less harsh yellow */
+  
+);
   background: linear-gradient(135deg, #e0f7fa, #99e3ed);
+
 
   font-family: sans-serif;
 }
@@ -29,7 +39,6 @@ canvas {
 
   border: 2px solid black;
   /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5); */
-  background-color: white;
 }
 .overlay {
   position: fixed;
@@ -76,3 +85,17 @@ canvas {
 #restartBtn:active {
   transform: scale(0.98);
 }
+#scoreBoard {
+  margin-bottom: 10px;
+  text-align: center;
+  background: white;
+  border-radius: 10px;
+  padding: 10px 15px;
+  font-family: 'Courier New', monospace;
+  font-size: 16px;
+  color: #333;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+
+
