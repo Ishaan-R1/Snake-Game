@@ -5,19 +5,13 @@ body {
   justify-content: center;
   height: 100vh;
   margin: 0;
-  /* background-color: #f0f0f0; */
-  background: #2A7B9B;
-/* background: linear-gradient(52deg, rgba(42, 123, 155, 1) 0%, rgba(87, 199, 133, 1) 50%, rgba(237, 221, 83, 1) 100%); */
-background: linear-gradient(
-  52deg,
-  rgba(42, 123, 155, 0.8) 0%,       /* Softer teal-blue */
-  rgba(87, 199, 133, 0.75) 50%,     /* Milder green */
-  rgba(237, 221, 83, 0.7) 100%      /* Less harsh yellow */
-  
-);
-  background: linear-gradient(135deg, #e0f7fa, #99e3ed);
-
-
+  background: #82e7f5;
+  background: linear-gradient(
+    0deg,
+    rgba(130, 231, 245, 1) 1%,
+    rgba(153, 227, 237, 1) 39%,
+    rgba(224, 247, 250, 1) 80%
+  );
   font-family: sans-serif;
 }
 
@@ -36,9 +30,7 @@ canvas {
   height: 90vmin;
   max-width: 600px;
   max-height: 600px;
-
   border: 2px solid black;
-  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5); */
 }
 .overlay {
   position: fixed;
@@ -50,7 +42,7 @@ canvas {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 10;  
+  z-index: 10;
 }
 
 .message-box {
@@ -65,7 +57,8 @@ canvas {
   display: none;
 }
 
-#restartBtn {
+#restartBtn,
+#returnToMenu {
   background-color: #4caf50;
   color: white;
   font-size: 18px;
@@ -75,14 +68,16 @@ canvas {
   border-radius: 8px;
   cursor: pointer;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
 }
 
-#restartBtn:hover {
+#restartBtn:hover,
+#returnToMenu:hover {
   background-color: #45a049;
-  transform: scale(1.05);
 }
 
-#restartBtn:active {
+#restartBtn:active,
+#returnToMenu:active {
   transform: scale(0.98);
 }
 #scoreBoard {
@@ -91,11 +86,45 @@ canvas {
   background: white;
   border-radius: 10px;
   padding: 10px 15px;
-  font-family: 'Courier New', monospace;
+  font-family: "Courier New", monospace;
   font-size: 16px;
   color: #333;
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
   z-index: 10;
 }
+#menu {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 2rem;
+  border: 2px solid #333;
+  border-radius: 1rem;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  z-index: 10;
+}
 
+#menu h1 {
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  color: #333;
+}
 
+#menu button {
+  padding: 0.5rem 1.5rem;
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#menu button:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
+}

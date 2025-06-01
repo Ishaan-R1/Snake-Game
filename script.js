@@ -4,13 +4,18 @@ const clickSound = document.getElementById("clickSound");
 const restartSound = document.getElementById("restartSound");
 const turnSound = document.getElementById("turnSound");
 
-
 const overlay = document.getElementById("gameOverOverlay");
 const restartBtn = document.getElementById("restartBtn");
+const startBtn = document.getElementById("startBtn");
+const mainMenu = document.getElementById("menu");
+const scoreBoard = document.getElementById("scoreBoard");
+
+const returnToMenuBtn = document.getElementById("returnToMenu");
 
 const savedHighScore = localStorage.getItem("highScore") || 0;
-document.getElementById("highScore").innerHTML =
-  `<i class="fa-solid fa-trophy" style="color: #ffd700;"></i> High Score: ${savedHighScore}`;;
+document.getElementById(
+  "highScore"
+).innerHTML = `<i class="fa-solid fa-trophy" style="color: #ffd700;"></i> High Score: ${savedHighScore}`;
 // Get the canvas element
 const canvas = document.getElementById("gameCanvas");
 
@@ -120,7 +125,6 @@ function advanceSnake() {
     biteSound.currentTime = 0;
     biteSound.play();
     score += 10;
-    // finalScore = score;
     document.getElementById("score").innerHTML = score;
     document.getElementById("finalScore").innerHTML = "Final Score: " + score;
 
@@ -129,7 +133,6 @@ function advanceSnake() {
     snake.pop(); // Remove tail
   }
 }
-// clearCanvas();
 
 function randomTen(min, max) {
   return Math.round((Math.random() * (max - min) + min) / 10) * 10;
@@ -186,11 +189,27 @@ function resetGame() {
 restartBtn.addEventListener("click", function () {
   restartSound.currentTime = 0;
   restartSound.play();
-  // clickSound.currentTime = 0;
-  // clickSound.play();
   overlay.classList.add("hidden"); // Hide game over overlay
   resetGame();
   main();
+});
+returnToMenuBtn.addEventListener("click", function () {
+  clickSound.currentTime = 0;
+  clickSound.play();
+  overlay.classList.add("hidden"); // Hide game over overlay
+  mainMenu.style.display = "block";
+  canvas.style.display = "none";
+  scoreBoard.style.display = "none";
+  resetGame();
+});
+startBtn.addEventListener("click", function () {
+  clickSound.currentTime = 0;
+  clickSound.play();
+  mainMenu.style.display = "none";
+  scoreBoard.style.display = "block";
+  canvas.style.display = "block";
+  document.getElementById("gameContainer").style.display = "block";
+  main(); // Start game loop
 });
 
 function main() {
@@ -203,11 +222,17 @@ function main() {
 
     if (score > highScore) {
       localStorage.setItem("highScore", score);
-      document.getElementById("highScore").innerHTML = `<i class="fa-solid fa-trophy" style="color: #ffd700;"></i> High Score: ${score}`;
+      document.getElementById(
+        "highScore"
+      ).innerHTML = `<i class="fa-solid fa-trophy" style="color: #ffd700;"></i> High Score: ${score}`;
       document.getElementById("highScore").innerHTML = "High Score: " + score;
+      document.getElementById(
+        "finalScore"
+      ).innerHTML = `<i class="fa-solid fa-trophy" style="color: #ffd700;"></i> New High Score: ${score}`;
     } else {
-      document.getElementById("highScore").innerHTML =
-        `<i class="fa-solid fa-trophy" style="color: #ffd700;"></i> High Score: ${highScore}`;
+      document.getElementById(
+        "highScore"
+      ).innerHTML = `<i class="fa-solid fa-trophy" style="color: #ffd700;"></i> High Score: ${highScore}`;
     }
     return; // Stop the loop if game over
   }
@@ -224,4 +249,3 @@ function main() {
 
 document.addEventListener("keydown", changeDirection);
 createFood();
-main(); // Start the game loop

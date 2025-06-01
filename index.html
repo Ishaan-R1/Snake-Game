@@ -17,9 +17,12 @@
     <audio id="turnSound" src="Sounds/turn_sound.wav" preload="auto"></audio>
 
 
-    
+    <div id="menu">
+        <h1>Snake Game</h1>
+        <button id="startBtn">Start Game</button>
+    </div>
 
-    <div id="scoreBoard">
+    <div id="scoreBoard" style="display: none;">
         <div id="score">0</div>
         <div id="highScore">0</div>
     </div>
@@ -30,10 +33,12 @@
             <div id="finalScore">0</div>
 
             <button id="restartBtn">Restart Game</button>
+            <button id="returnToMenu">Return to Menu</button>
         </div>
     </div>
-
-    <canvas id="gameCanvas" width="300" height="300"></canvas>
+    <div id="gameContainer" style="display: none;">
+        <canvas id="gameCanvas" width="300" height="300"></canvas>
+    </div>
 
     <script src="script.js"></script>
 </body>
